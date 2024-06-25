@@ -102,5 +102,12 @@ public class Main {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         System.out.println("\nTotal salaries: R$ " + totalSalaries);
 
+        // 3.12 
+        System.out.println("\nSalaries in terms of minimum wages:");
+        BigDecimal minimumWage = new BigDecimal("1212.00");
+        employees.forEach(employee -> {
+            BigDecimal salaryInMinimumWages = employee.getSalary().divide(minimumWage, 2, BigDecimal.ROUND_HALF_UP);
+            System.out.println(employee.getName() + ": " + salaryInMinimumWages + " minimum wages");
+        });
     }
 }
