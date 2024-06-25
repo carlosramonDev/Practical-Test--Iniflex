@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,11 +79,21 @@ public class Main {
         // 3.9 
         System.out.println("\nOldest employee:");
         Employee oldestEmployee = employees.stream()
-                .min((emp1, emp2) -> emp1.getBirthDate().compareTo(emp2.getBirthDate()))
+                .min(Comparator.comparing(Employee::getBirthDate))
                 .orElse(null);
         if (oldestEmployee != null) {
             long age = LocalDate.now().getYear() - oldestEmployee.getBirthDate().getYear();
             System.out.println("Name: " + oldestEmployee.getName() + ", Age: " + age);
         }
+
+        // 3.10 
+        System.out.println("\nEmployees sorted alphabetically by name:");
+        employees.stream()
+                .sorted(Comparator.comparing(Employee::getName))
+                .forEach(employee -> {
+                    String formattedSalary = employee.getSalary().toString().replace('.', ',');
+                    System.out.println("Name: " + employee.getName() +
+                            ", Salary: R$ " + formattedSalary);
+                });
     }
 }
