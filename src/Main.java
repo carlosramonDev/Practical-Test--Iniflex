@@ -2,6 +2,7 @@ import model.Employee;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +54,7 @@ public class Main {
             employeesByPosition.get(position).add(employee);
         }
 
-        // Print 
+        // 3.6
         System.out.println("\nEmployees grouped by position:");
         employeesByPosition.forEach((position, empList) -> {
             System.out.println(position + ":");
@@ -63,5 +64,15 @@ public class Main {
                         ", Salary: R$ " + formattedSalary);
             });
         });
+
+        // 3.8 
+        System.out.println("\nEmployees with birthdays in October and December:");
+        DateTimeFormatter monthFormatter = DateTimeFormatter.ofPattern("MMMM");
+        employees.stream()
+                .filter(emp -> emp.getBirthDate().getMonth() == Month.OCTOBER || emp.getBirthDate().getMonth() == Month.DECEMBER)
+                .forEach(emp -> {
+                    String monthName = emp.getBirthDate().format(monthFormatter);
+                    System.out.println(emp.getName() + " - Birthday in " + monthName);
+                });
     }
 }
