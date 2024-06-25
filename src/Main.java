@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -41,12 +43,25 @@ public class Main {
             employee.setSalary(newSalary);
         });
 
+        // 3.5 
+        Map<String, List<Employee>> employeesByPosition = new HashMap<>();
+        for (Employee employee : employees) {
+            String position = employee.getPosition();
+            if (!employeesByPosition.containsKey(position)) {
+                employeesByPosition.put(position, new ArrayList<>());
+            }
+            employeesByPosition.get(position).add(employee);
+        }
+
         // Print 
-        System.out.println("\nEmployees with salary increased:");
-        employees.forEach(employee -> {
-            String formattedSalary = employee.getSalary().toString().replace('.', ',');
-            System.out.println("Name: " + employee.getName() +
-                    ", Salary: R$ " + formattedSalary);
+        System.out.println("\nEmployees grouped by position:");
+        employeesByPosition.forEach((position, empList) -> {
+            System.out.println(position + ":");
+            empList.forEach(emp -> {
+                String formattedSalary = emp.getSalary().toString().replace('.', ',');
+                System.out.println("\tName: " + emp.getName() +
+                        ", Salary: R$ " + formattedSalary);
+            });
         });
     }
 }
