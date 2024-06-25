@@ -2,6 +2,7 @@ import model.Employee;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,15 @@ public class Main {
         // 3.2 
         employees.removeIf(employee -> employee.getName().equals("João"));
 
-        // Print 
-        employees.forEach(System.out::println);
+        // 3.3 
+        System.out.println("All employees:");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        employees.forEach(employee -> {
+            String formattedDate = employee.getBirthDate().format(dateFormatter);
+            String formattedSalary = employee.getSalary().toString().replace('.', ',');
+            System.out.println("Name: " + employee.getName() +
+                    ", Birth Date: " + formattedDate +
+                    ", Salary: R$ " + formattedSalary);
+        });
     }
 }
