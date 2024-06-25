@@ -34,5 +34,19 @@ public class Main {
                     ", Birth Date: " + formattedDate +
                     ", Salary: R$ " + formattedSalary);
         });
+
+        // 3.4 
+        employees.forEach(employee -> {
+            BigDecimal newSalary = employee.getSalary().multiply(new BigDecimal("1.10"));
+            employee.setSalary(newSalary);
+        });
+
+        // Print 
+        System.out.println("\nEmployees with salary increased:");
+        employees.forEach(employee -> {
+            String formattedSalary = employee.getSalary().toString().replace('.', ',');
+            System.out.println("Name: " + employee.getName() +
+                    ", Salary: R$ " + formattedSalary);
+        });
     }
 }
