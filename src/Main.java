@@ -95,5 +95,12 @@ public class Main {
                     System.out.println("Name: " + employee.getName() +
                             ", Salary: R$ " + formattedSalary);
                 });
+
+        // 3.11 
+        BigDecimal totalSalaries = employees.stream()
+                .map(Employee::getSalary)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.println("\nTotal salaries: R$ " + totalSalaries);
+
     }
 }
