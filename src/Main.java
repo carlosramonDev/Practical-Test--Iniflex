@@ -74,5 +74,15 @@ public class Main {
                     String monthName = emp.getBirthDate().format(monthFormatter);
                     System.out.println(emp.getName() + " - Birthday in " + monthName);
                 });
+
+        // 3.9 
+        System.out.println("\nOldest employee:");
+        Employee oldestEmployee = employees.stream()
+                .min((emp1, emp2) -> emp1.getBirthDate().compareTo(emp2.getBirthDate()))
+                .orElse(null);
+        if (oldestEmployee != null) {
+            long age = LocalDate.now().getYear() - oldestEmployee.getBirthDate().getYear();
+            System.out.println("Name: " + oldestEmployee.getName() + ", Age: " + age);
+        }
     }
 }
