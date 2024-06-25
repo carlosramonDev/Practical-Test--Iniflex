@@ -20,6 +20,9 @@ public class Main {
         employees.add(new Employee("Heloísa", LocalDate.of(2003, 5, 24), new BigDecimal("1606.85"), "Electrician"));
         employees.add(new Employee("Helena", LocalDate.of(1996, 9, 2), new BigDecimal("2799.93"), "Manager"));
 
+        // 3.2 
+        employees.removeIf(employee -> employee.getName().equals("João"));
+
         // Print 
         employees.forEach(System.out::println);
     }
